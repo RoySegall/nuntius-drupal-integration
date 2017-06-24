@@ -1,0 +1,7 @@
+name = Nuntius
+description = Nuntius integration
+core = 7.x
+php = 5.5
+
+dependencies[] = message
+dependencies[] = message_example

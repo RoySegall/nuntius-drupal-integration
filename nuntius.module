@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * nuntius.module
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function nuntius_menu() {
+  $items = [];
+
+  $items['admin/config/system/nuntius'] = [
+    'title' => 'Nuntius',
+    'description' => 'Manage nuntius integration',
+    'access arguments' => ['manage_nuntius'],
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['nuntius_settings'],
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function nuntius_permission() {
+  return [
+    'manage_nuntius' => [
+      'title' => 'Manager nuntius integration',
+      'description' => 'Manage webhook and other integration with nuntius',
+    ],
+  ];
+}
+
+/**
+ * Nuntius settings form callback.
+ */
+function nuntius_settings($form, $form_state) {
+  $form = [];
+
+  $form['nuntius_token'] = [
+    '#type' => 'textfield',
+    '#title' => t('Nuntius token'),
+    '#description' => t('A token validation in nuntius and on Drupal'),
+    '#default_value' => variable_get('nuntius_token'),
+  ];
+
+  $form['nuntius_slack_address'] = [
+    '#type' => 'textfield',
+    '#title' => t('Nuntius address'),
+    '#description' => t('Set the address to which slack updates will be sent.'),
+    '#default_value' => variable_get('nuntius_slack_address'),
+  ];
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_node_insert().
+ *
+ * When a node is being inserted we will push updates the slack.
+ */
+function nuntius_node_insert($node) {
+  $uri = entity_uri('node', $node);
+
+  drupal_http_request(variable_get('nuntius_slack_address'), [
+    'method' => 'POST',
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    'data' => http_build_query([
+      'json' => $this->node->nid,
+      'url' =>  url($uri['path'], ['absolute' => TRUE]),
+    ]),
+  ]);
+
+}
