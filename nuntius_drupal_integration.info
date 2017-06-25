@@ -1,0 +1,4 @@
+name = Nuntius drupal integration
+description = Demonstrate how to integrate between Drupal and Nuntius
+core = 7.x
+php = 5.5
