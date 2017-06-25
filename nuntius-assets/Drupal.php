@@ -27,7 +27,7 @@ class Drupal implements WebhooksRoutingControllerInterface {
     $token = $request->request->get('token');
     $url = $request->request->get('url');
 
-    if ($token != 'me') {
+    if ($token != Nuntius::getSettings()->getSetting('drupal_token')) {
       Nuntius::getEntityManager()->get('logger')->save([
         'type' => 'error',
         'message' => 'The token sent in the header, "' . $token. '", is not valid.',
