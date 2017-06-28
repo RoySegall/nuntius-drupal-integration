@@ -4,5 +4,15 @@
  * Implements hook_uninstall().
  */
 function nuntius_drupal_integration_uninstall() {
+  $variables = [
+    'nuntius_drupal_integration_token',
+    'nuntius_drupal_integration_slack_address',
+    'nuntius_drupal_integration_facebook_address',
+    'nuntius_drupal_integration_slack_room'
+  ];
+
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
 
 }
