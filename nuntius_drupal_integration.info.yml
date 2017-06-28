@@ -1,0 +1,5 @@
+name: Nuntius Drupal integration
+type: module
+description: Demonstrate how to integrate between Drupal and Nuntius
+core: 8.x
+package: Nuntius

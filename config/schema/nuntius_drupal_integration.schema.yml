@@ -1,0 +1,18 @@
+# Schema for the configuration files of the Nuntius drupal integration module.
+
+nuntius_drupal_integration.settings:
+  type: config_object
+  label: 'Nuntius Drupal inegration settings'
+  mapping:
+    token:
+      type: string
+      label: 'A token validation in nuntius and on Drupal.'
+    slack_address:
+      type: string
+      label: 'Set the address to which slack updates will be sent.'
+    facebook_address:
+      type: string
+      label: 'Set the address to which slack updates will be sent.'
+    slack_room:
+      type: string
+      label: 'Which room will be notified there something new on the site.'

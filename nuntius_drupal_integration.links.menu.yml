@@ -1,0 +1,7 @@
+nuntius_drupal_integration.nuntius_drupal_integration_settings:
+  title: 'Nuntius Drupal integration'
+  route_name: nuntius_drupal_integration.nuntius_drupal_integration_settings
+  description: 'Set up nuntius settings'
+  parent: system.admin_config_media
+  weight: 99
+

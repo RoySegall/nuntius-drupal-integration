@@ -1,0 +1,11 @@
+
+nuntius_drupal_integration.nuntius_drupal_integration_settings:
+  path: 'admin/config/system/nuntius'
+  defaults:
+    _form: '\Drupal\nuntius_drupal_integration\Form\NuntiusDrupalIntegrationSettings'
+    _title: 'Nuntius Drupal integration'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

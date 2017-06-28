@@ -1,0 +1,16 @@
+{
+  "name": "drupal/nuntius_drupal_integration",
+  "type": "drupal-module",
+  "description": "Demonstrate how to integrate between Drupal and Nuntius",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/nuntius_drupal_integration",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/nuntius_drupal_integration",
+    "source": "http://cgit.drupalcode.org/nuntius_drupal_integration"
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.2@dev"
+  }
+}

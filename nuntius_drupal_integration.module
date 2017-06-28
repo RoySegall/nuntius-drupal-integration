@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Contains nuntius_drupal_integration.module.
+ */
+
+/**
+ * Implements hook_entity_insert().
+ */
+function nuntius_drupal_integration_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  $config = \Drupal::service('config.factory')->get('nuntius_drupal_integration.settings');
+
+  $payload = [
+    'object' => json_encode($entity->toArray()),
+    'url' =>  $entity->toUrl('canonical', ['absolute' => TRUE])->toString(),
+    'slack_room' => $config->get('slack_room'),
+    'token' => $config->get('token'),
+    'drupal8' => TRUE,
+  ];
+
+  foreach (['facebook', 'slack'] as $platform) {
+    if ($nuntius = $config->get($platform . '_address')) {
+      Drupal::httpClient()->post($nuntius, ['form_params' => $payload]);
+    }
+  }
+
+}
